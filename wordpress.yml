@@ -26,6 +26,8 @@ spec:
             configMapKeyRef:
               name: wordpress-configmap
               key: database_url
+        - name: WORDPRESS_DB_USER
+          value: "root"
         - name: WORDPRESS_DB_PASSWORD
           valueFrom:
             secretKeyRef:
