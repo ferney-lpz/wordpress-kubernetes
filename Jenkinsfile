@@ -17,9 +17,7 @@ pipeline {
         stage('CI') {
             steps {
                 echo 'Etapa_2: Validando la sintaxis de los archivos YAML'
-                withEnv(['JENKINS_URL=', 'HTTP_PROXY=', 'HTTPS_PROXY=', 'NO_PROXY=']) {
                 sh "kubectl apply -f ${K8S_DIR}/ --dry-run=client"
-                }
             }
         }
 
