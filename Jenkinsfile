@@ -43,7 +43,7 @@ pipeline {
                 sh "kubectl apply -f ${K8S_DIR}/wordpress.yml -n ${NAMESPACE}"
                 
                 echo 'Esperando que los pods de WordPress estén listos...'
-                sh "kubectl rollout status deployment/wordpress -n ${NAMESPACE} --timeout=60s"
+                sh "kubectl rollout status deployment/wordpress-app -n ${NAMESPACE} --timeout=60s"
             }
         }
     }
