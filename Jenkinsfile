@@ -31,6 +31,9 @@ pipeline {
         stage('CD') {
             steps {
                 echo 'Fase CD: Desplegando WordPress en el clúster de Kubernetes...'
+
+                echo "Asegurando la existencia del namespace ${NAMESPACE}..."
+                sh "kubectl create namespace ${NAMESPACE} --dry-run=client -o yaml | kubectl apply -f -"
                 
                 sh "kubectl apply -f ${K8S_DIR}/PV.yml -n ${NAMESPACE}"
                 sh "kubectl apply -f ${K8S_DIR}/PVC.yml -n ${NAMESPACE}"
