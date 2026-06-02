@@ -6,4 +6,4 @@ metadata:
 data:
   # Nombre de la base de datos que se creará automáticamente
   database-name: wordpress_db
-  database_url: mysqldb-service.test-wordpress.svc.cluster.local
+  database_url: mysqldb-service:3306
