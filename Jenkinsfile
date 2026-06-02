@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         NAMESPACE = 'test_wordpress'
-        K8S_DIR   = 'wordpress-kubernetes'
+        K8S_DIR   = '.'
     }
 
     stages {
@@ -32,12 +32,12 @@ pipeline {
             steps {
                 echo 'Fase CD: Desplegando WordPress en el clúster de Kubernetes...'
                 
-                sh "kubectl apply -f ${K8S_DIR}/pvc.yaml -n ${NAMESPACE}"
-                sh "kubectl apply -f ${K8S_DIR}/secret.yaml -n ${NAMESPACE}"
-                sh "kubectl apply -f ${K8S_DIR}/mysql-dep.yaml -n ${NAMESPACE}"
-                sh "kubectl apply -f ${K8S_DIR}/mysql-svc.yaml -n ${NAMESPACE}"
-                sh "kubectl apply -f ${K8S_DIR}/wp-dep.yaml -n ${NAMESPACE}"
-                sh "kubectl apply -f ${K8S_DIR}/wp-svc.yaml -n ${NAMESPACE}"
+                sh "kubectl apply -f ${K8S_DIR}/PV.yml -n ${NAMESPACE}"
+                sh "kubectl apply -f ${K8S_DIR}/PVC.yml -n ${NAMESPACE}"
+                sh "kubectl apply -f ${K8S_DIR}/mysql-secret.yml -n ${NAMESPACE}"
+                sh "kubectl apply -f ${K8S_DIR}/wordpress-configmap.yml -n ${NAMESPACE}"
+                sh "kubectl apply -f ${K8S_DIR}/mysql.yml -n ${NAMESPACE}"
+                sh "kubectl apply -f ${K8S_DIR}/wordpress.yml -n ${NAMESPACE}"
                 
                 echo 'Esperando que los pods de WordPress estén listos...'
                 sh "kubectl rollout status deployment/wordpress -n ${NAMESPACE} --timeout=60s"
