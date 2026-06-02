@@ -6,14 +6,6 @@ pipeline {
         K8S_DIR   = '.'
     }
 
-    stages {
-        stage('Código') {
-            steps {
-                echo 'Etapa_1: Descargando repositorio de GitHub (ArchivosYAML)'
-                checkout scm
-            }
-        }
-
         stage('CI') {
             steps {
                 echo 'Etapa_2: Validando la sintaxis de los archivos YAML'
