@@ -35,7 +35,7 @@ pipeline {
                 sh "kubectl apply -f ${K8S_DIR}/wordpress.yml -n ${NAMESPACE}"
                 
                 echo 'Verificando deployment'
-                sh "kubectl rollout status deployment/wordpress-app -n ${NAMESPACE} --timeout=60s"
+                sh "kubectl rollout status deployment/wordpress-app -n ${NAMESPACE} --timeout=90s"
             }
         }
     }
