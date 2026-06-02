@@ -46,7 +46,7 @@ spec:
         readinessProbe:
           exec:
             command:
-           - sh
+            - sh
             - c
             - mysqladmin ping -h locahost -u root -p$(MYSQL_ROOT_PASSWORD)
           initialDelaySeconds: 20
