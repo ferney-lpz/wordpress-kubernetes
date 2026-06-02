@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        NAMESPACE = 'test_wordpress'
+        NAMESPACE = 'test-wordpress'
         K8S_DIR   = '.'
     }
 
