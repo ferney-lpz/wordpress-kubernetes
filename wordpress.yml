@@ -36,7 +36,7 @@ spec:
             configMapKeyRef:
               name: wordpress-configmap
               key: database-name
-# --- CONFIGURACIÓN DE AUTO-REPARACIÓN Wordpress
+# --- CONFIGURACIÓN DE AUTO-REPARACIÓN (Ya identada correctamente adentro del contenedor)
         livenessProbe:
           httpGet:
             path: /wp-includes/images/blank.gif
