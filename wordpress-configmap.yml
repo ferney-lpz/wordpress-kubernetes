@@ -2,7 +2,8 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: wordpress-configmap
+  namespace: test-wordpress
 data:
   # Nombre de la base de datos que se creará automáticamente
   database-name: wordpress_db
-  database_url: mysqldb-service:3306
+  database_url: mysqldb-service.test-wordpress.svc.cluster.local
