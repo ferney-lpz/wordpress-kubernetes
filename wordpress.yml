@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress-app
+  labels:
+    app: wordpress-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wordpress-app
+  template:
+    metadata:
+      labels:
+        app: wordpress-app
+    spec:
+      containers:
+      - name: wordpress-app
+        image: wordpress:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: WORDPRESS_DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: wordpress-configmap
+              key: database_url
+        - name: WORDPRESS_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: mysql-root-password
+        - name: WORDPRESS_DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: wordpress-configmap
+              key: database-name
+# --- CONFIGURACIÓN DE AUTO-REPARACIÓN Wordpress
+        livenessProbe:
+          httpGet:
+            path: /wp-includes/images/blank.gif
+            port: 80
+          initialDelaySeconds: 45
+          periodSeconds: 15
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /wp-includes/images/blank.gif
+            port: 80
+          initialDelaySeconds: 30
+          periodSeconds: 10
+# ------------------------------------- #
+        volumeMounts:
+        - name: wordpress-persistent-storage
+          mountPath: /var/www/html
+      volumes:
+      - name: wordpress-persistent-storage
+        persistentVolumeClaim:
+          claimName: wordpress-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wordpress-app-service
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    app: wordpress-app
+  type: LoadBalancer
