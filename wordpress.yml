@@ -68,4 +68,4 @@ spec:
       targetPort: 80
   selector:
     app: wordpress-app
-  type: LoadBalancer
+  type: NodePort
