@@ -14,7 +14,7 @@ pipeline {
             }
         }
 
-        stage(CI) {
+        stage('CI') {
             steps {
                 echo 'Fase CI: Validando la sintaxis de los archivos YAML...'
                 sh "kubectl apply -f ${K8S_DIR}/ --dry-run=client"
