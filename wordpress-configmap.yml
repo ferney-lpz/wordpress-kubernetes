@@ -6,4 +6,4 @@ metadata:
 data:
   # Nombre de la base de datos que se creará automáticamente
   database-name: wordpress_db
-  database_url: mysqldb-service
+  database_url: "10.100.194.82"
