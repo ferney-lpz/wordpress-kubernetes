@@ -25,7 +25,7 @@ pipeline {
                 echo 'Etapa_4: Desplegando WordPress & MYSQL en el clúster de Kubernetes'
 
                 echo "Verificando existencia del namespace ${NAMESPACE}"
-                sh "kubectl create namespace ${NAMESPACE} --dry-run=client -o yml | kubectl apply -f -"
+                sh "kubectl create namespace ${NAMESPACE} --dry-run=client -o yaml | kubectl apply -f -"
                 
                 sh "kubectl apply -f ${K8S_DIR}/PV.yml -n ${NAMESPACE}"
                 sh "kubectl apply -f ${K8S_DIR}/PVC.yml -n ${NAMESPACE}"
