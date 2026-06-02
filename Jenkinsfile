@@ -5,7 +5,7 @@ pipeline {
         NAMESPACE = 'test-wordpress'
         K8S_DIR   = '.'
     }
-
+    stages {
         stage('CI') {
             steps {
                 echo 'Etapa_2: Validando la sintaxis de los archivos YAML'
