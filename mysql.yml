@@ -35,9 +35,10 @@ spec:
         livenessProbe:
           exec:
             command:
-            - sh
-            - -c
-            - "mysqladmin ping -h localhost -u root -p${MYSQL_ROOT_PASSWORD}"
+            - mysqladmin
+            - ping
+            - -h
+            - localhost
           initialDelaySeconds: 45
           periodSeconds: 15
           timeoutSeconds: 5
@@ -45,9 +46,10 @@ spec:
         readinessProbe:
           exec:
             command:
-            - sh
-            - -c
-            - "mysqladmin ping -h localhost -u root -p${MYSQL_ROOT_PASSWORD}"
+            - mysqladmin
+            - ping
+            - -h
+            - localhost
           initialDelaySeconds: 20
           periodSeconds: 10
 # ------------------------------------------------- #
