@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         NAMESPACE = 'test_wordpress'
-        K8S_DIR   = 'k8s'
+        K8S_DIR   = 'wordpress-kubernetes'
     }
 
     stages {
