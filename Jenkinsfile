@@ -8,15 +8,11 @@ pipeline {
     stages {
         stage('CI') {
             steps {
-                echo 'Etapa_2: Validando la sintaxis de los archivos YAML'
-                sh "kubectl apply -f ${K8S_DIR}/ --dry-run=client"
-            }
-        }
-
-        stage('Pruebas Continuas') {
-            steps {
-                echo 'Etapa_3: Validando conexión con el clúster de Kubernetes'
+                echo 'Etapa_2: Validando conexión al cluster y la sintaxis de los archivos YAML'
+                echo 'Prueba rapide de conexióon'
                 sh 'kubectl cluster-info'
+                echo 'Simulacion profunda en el cluster'
+                sh "kubectl apply -f ${K8S_DIR}/ --dry-run=server"
             }
         }
 
@@ -34,7 +30,8 @@ pipeline {
                 sh "kubectl apply -f ${K8S_DIR}/mysql.yml -n ${NAMESPACE}"
                 sh "kubectl apply -f ${K8S_DIR}/wordpress.yml -n ${NAMESPACE}"
                 
-                echo 'Verificando deployment'
+                echo 'Verificando estado de los deployment'
+                sh "kubectl rollout status deployment/mysqldb -n ${NAMESPACE} --timeout=90s"
                 sh "kubectl rollout status deployment/wordpress-app -n ${NAMESPACE} --timeout=90s"
             }
         }
