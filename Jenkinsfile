@@ -8,10 +8,12 @@ pipeline {
     stages {
         stage('CI') {
             steps {
-                echo 'Etapa_2: Validando conexión al cluster y la sintaxis de los archivos YAML'
-                echo 'Prueba rapide de conexióon'
+                echo 'Etapa_2: Validando conexión al clúster y la sintaxis de los archivos YAML'
+                echo 'Prueba rapida de conexión'
                 sh 'kubectl cluster-info'
-                echo 'Simulacion profunda en el cluster'
+                echo 'Listando archivos descargados de GitHub'
+                sh "ls -la ${K8S_DIR}"
+                echo 'Simulación profunda en el clúster'
                 sh "kubectl apply -f ${K8S_DIR}/ --dry-run=server"
             }
         }
