@@ -13,6 +13,8 @@ pipeline {
                 sh 'kubectl cluster-info'
                 echo 'Listando archivos descargados de GitHub'
                 sh "ls -la ${K8S_DIR}"
+                echo 'Asegurando existencia del namespace para simulación'
+                sh "kubectl create namespace ${NAMESPACE} --dry-run=client -o yaml | kubectl apply -f -"
                 echo 'Simulación profunda en el clúster'
                 sh "kubectl apply -f ${K8S_DIR}/ --dry-run=server"
             }
