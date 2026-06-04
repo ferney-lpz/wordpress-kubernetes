@@ -22,7 +22,7 @@ pipeline {
 
         stage('CD') {
             steps {
-                echo 'Etapa_4: Desplegando WordPress & MYSQL en el clúster de Kubernetes'
+                echo 'Etapa_3: Desplegando WordPress & MYSQL en el clúster de Kubernetes'
 
                 echo "Verificando existencia del namespace ${NAMESPACE}"
                 sh "kubectl create namespace ${NAMESPACE} --dry-run=client -o yaml | kubectl apply -f -"
